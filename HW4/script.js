@@ -12,16 +12,16 @@ function makeChoice(choice) {
   if (choice === 1) {
     storyText.textContent =
       "You walk down the left path and hear water flowing nearby. Steps taken: " + stepsTaken;
-    storyImage.src = "images/river.jpg";
+    storyImage.src = "images/river.jpeg";
 
   } else if (choice === 2) {
     storyText.textContent =
       "The right path leads you to an abandoned cabin. Steps taken: " + stepsTaken;
-    storyImage.src = "images/cabin.jpg";
+    storyImage.src = "images/cabin.jpeg";
 
   } else if (choice === 3) {
     storyText.textContent =
       "You stay still. The forest grows quieter… and colder. Steps taken: " + stepsTaken;
-    storyImage.src = "images/night.jpg";
+    storyImage.src = "images/night.jpeg";
   }
 }
