@@ -18,8 +18,8 @@ let blankImages = [
 let actualImages = [
     "images/img1.jpeg",
     "images/img1.jpeg",
-    "images/img2.jpeg",
-    "images/img2.jpeg",
+    "images/img2.png",
+    "images/img2.png",
     "images/img3.jpeg",
     "images/img3.jpeg",
     "images/img4.jpeg",
