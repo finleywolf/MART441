@@ -50,11 +50,19 @@ let slide5 = new Slide(
 "2019"
 )
 
+
 let slides = [slide1, slide2, slide3, slide4, slide5]
 
+let lastIndex = -1
 function nextSlide() {
 
-let randomIndex = Math.floor(Math.random() * slides.length)
+let randomIndex
+
+do {
+    randomIndex = Math.floor(Math.random() * slides.length)
+} while (randomIndex === lastIndex)
+
+lastIndex = randomIndex
 
 let slide = slides[randomIndex]
 
