@@ -20,7 +20,7 @@ let slide1 = new Slide(
 
 let slide2 = new Slide(
 "Iranian Women Protest",
-"images/iranprotest.jpg",
+"images/iranprotest.jpeg",
 "A woman stands publicly cutting her hair during protests in Iran. The image symbolizes resistance to mandatory dress laws and a broader movement demanding women's autonomy and freedom.",
 "Getty Images",
 "2022"
