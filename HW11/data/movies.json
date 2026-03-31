@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Spirited Away",
+    "director": "Hayao Miyazaki",
+    "year": 2001,
+    "genre": "Fantasy"
+  },
+  {
+    "title": "Everything Everywhere All at Once",
+    "director": "Daniel Kwan & Daniel Scheinert",
+    "year": 2022,
+    "genre": "Science Fiction"
+  },
+  {
+    "title": "The Batman",
+    "director": "Matt Reeves",
+    "year": 2022,
+    "genre": "Action"
+  },
+  {
+    "title": "Little Women",
+    "director": "Greta Gerwig",
+    "year": 2019,
+    "genre": "Drama"
+  }
+]
