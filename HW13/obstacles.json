@@ -1,0 +1,7 @@
+[
+  { "x": 100, "y": 100, "width": 100, "height": 20, "color": "red" },
+  { "x": 300, "y": 200, "width": 150, "height": 20, "color": "blue" },
+  { "x": 200, "y": 350, "width": 20, "height": 100, "color": "green" },
+  { "x": 400, "y": 100, "width": 20, "height": 150, "color": "purple" },
+  { "x": 50, "y": 300, "width": 120, "height": 20, "color": "orange" }
+]
