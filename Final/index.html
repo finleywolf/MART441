@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Collect & Avoid Game</title>
+<style>
+  body {
+    margin: 0;
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  canvas {
+    background: #222;
+    display: block;
+    margin: 20px auto;
+    border: 2px solid white;
+  }
+  #ui {
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Collect & Avoid</h1>
+<canvas id="gameCanvas" width="600" height="400"></canvas>
+<div id="ui">
+  <p id="score">Score: 0</p>
+  <p id="gameOver" style="display:none;">Game Over! Press R to restart</p>
+</div>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+let keys = {};
+let score = 0;
+let gameOver = false;
+
+
+// PLAYER
+class Player {
+  constructor() {
+    this.x = 300;
+    this.y = 200;
+    this.size = 20;
+    this.speed = 4;
+  }
+
+  move() {
+    if (keys["ArrowUp"]) this.y -= this.speed;
+    if (keys["ArrowDown"]) this.y += this.speed;
+    if (keys["ArrowLeft"]) this.x -= this.speed;
+    if (keys["ArrowRight"]) this.x += this.speed;
+
+    this.x = Math.max(0, Math.min(canvas.width - this.size, this.x));
+    this.y = Math.max(0, Math.min(canvas.height - this.size, this.y));
+  }
+
+  draw() {
+    ctx.fillStyle = "cyan";
+    ctx.fillRect(this.x, this.y, this.size, this.size);
+  }
+}
+
+// ITEMS
+class Item {
+  constructor(type) {
+    this.size = 15;
+    this.x = Math.random() * (canvas.width - this.size);
+    this.y = Math.random() * (canvas.height - this.size);
+    this.type = type; // "good" or "bad"
+  }
+
+  draw() {
+    ctx.fillStyle = this.type === "good" ? "lime" : "red";
+    ctx.fillRect(this.x, this.y, this.size, this.size);
+  }
+}
+
+// GAME OBJECTS
+let player = new Player();
+let items = [];
+
+// spawn items
+function spawnItems() {
+  if (items.length < 5) {
+    let type = Math.random() < 0.7 ? "good" : "bad";
+    items.push(new Item(type));
+  }
+}
+
+// COLLISION
+function checkCollision(a, b) {
+  return (
+    a.x < b.x + b.size &&
+    a.x + a.size > b.x &&
+    a.y < b.y + b.size &&
+    a.y + a.size > b.y
+  );
+}
+
+// UPDATE GAME
+function update() {
+  if (gameOver) return;
+
+  player.move();
+  spawnItems();
+
+  items = items.filter(item => {
+    if (checkCollision(player, item)) {
+      if (item.type === "good") {
+        score++;
+      } else {
+        gameOver = true;
+        document.getElementById("gameOver").style.display = "block";
+      }
+      document.getElementById("score").textContent = "Score: " + score;
+      return false;
+    }
+    return true;
+  });
+}
+
+// DRAW
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  player.draw();
+  items.forEach(item => item.draw());
+}
+
+// GAME LOOP
+function gameLoop() {
+  update();
+  draw();
+  requestAnimationFrame(gameLoop);
+}
+
+// CONTROLS
+document.addEventListener("keydown", (e) => {
+  keys[e.key] = true;
+
+  if (gameOver && e.key.toLowerCase() === "r") {
+    resetGame();
+  }
+});
+
+document.addEventListener("keyup", (e) => {
+  keys[e.key] = false;
+});
+
+// RESET
+function resetGame() {
+  player = new Player();
+  items = [];
+  score = 0;
+  gameOver = false;
+  document.getElementById("score").textContent = "Score: 0";
+  document.getElementById("gameOver").style.display = "none";
+}
+
+// START
+gameLoop();
+</script>
+
+</body>
+</html>
